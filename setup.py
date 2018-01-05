@@ -1,7 +1,6 @@
 """A simple, configurable statsd client for Flask apps.  """
 from setuptools import setup
 
-
 setup(
     name='Flask-StatsDClient',
     version='1.0',

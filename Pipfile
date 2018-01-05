@@ -17,6 +17,7 @@ pycodestyle = "*"
 "flake8" = "*"
 isort = "*"
 pylint = "*"
+wheel = "*"
 
 
 [requires]

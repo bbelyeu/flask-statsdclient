@@ -1,12 +1,15 @@
+"""Test the statsd extension module."""
 import time
 import unittest
 from unittest.mock import patch
 
 from flask import Flask
+
 from flask_statsdclient import StatsDClient
 
 
 def create_app():
+    """Create a Flask app for context."""
     app = Flask(__name__)
     client = StatsDClient()
     client.init_app(app)
@@ -14,20 +17,25 @@ def create_app():
 
 
 class TestStatsD(unittest.TestCase):
+    """Test StatsDClient class."""
 
     def setUp(self):
+        """Set up tests."""
         self.app = create_app()
         self.ctx = self.app.app_context()
         self.ctx.push()
 
     def tearDown(self):
+        """Tear down tests."""
         self.ctx.pop()
 
     def test_default_config(self):
+        """Test the default configs."""
         client = StatsDClient(self.app)
         self.assertEqual(('127.0.0.1', 8125), client.statsd.__dict__['_addr'])
 
     def test_custom_app_config(self):
+        """Test custom configs set on app."""
         self.app.config['STATSD_HOST'] = '10.1.1.1'
         self.app.config['STATSD_PORT'] = 9999
         self.app.config['STATSD_PREFIX'] = 'foo'
@@ -37,6 +45,7 @@ class TestStatsD(unittest.TestCase):
         self.assertEqual('foo', client.statsd.__dict__['_prefix'])
 
     def test_custom_kwarg_config(self):
+        """Test custom configs passed via kwargs."""
         config = {
             'STATSD_HOST': '1.2.3.4',
             'STATSD_PORT': 12345,
@@ -48,12 +57,14 @@ class TestStatsD(unittest.TestCase):
         self.assertEqual('foo.bar', client.statsd.__dict__['_prefix'])
 
     def test_decr(self):
+        """Test decr wrapper."""
         client = StatsDClient(self.app)
         with patch('statsd.StatsClient.decr') as mock_decr:
             client.decr('test.counter')
             mock_decr.assert_called_once_with('test.counter')
 
     def test_gauge(self):
+        """Test gauge wrapper."""
         client = StatsDClient(self.app)
         with patch('statsd.StatsClient.gauge') as mock_gauge:
             client.gauge('test', 1)
@@ -62,6 +73,7 @@ class TestStatsD(unittest.TestCase):
             mock_gauge.assert_called_with('foo', 1, delta=True)
 
     def test_incr(self):
+        """Test incr wrapper."""
         client = StatsDClient(self.app)
         with patch('statsd.StatsClient.incr') as mock_incr:
             client.incr('test.counter')
@@ -72,20 +84,23 @@ class TestStatsD(unittest.TestCase):
             mock_incr.assert_called_with('test.counter', rate=0.1)
 
     def test_set(self):
+        """Test set wrapper."""
         client = StatsDClient(self.app)
         with patch('statsd.StatsClient.set') as mock_set:
             client.set('test.counter', 1)
             mock_set.assert_called_once_with('test.counter', 1)
 
     def test_timer(self):
+        """Test timer wrapper."""
         client = StatsDClient(self.app)
         with patch('statsd.StatsClient.timer') as mock_timer:
             client.timer('test.counter')
             mock_timer.assert_called_once_with('test.counter')
 
     def test_timing(self):
+        """Test timing wrapper."""
         client = StatsDClient(self.app)
-        ts = int((time.time() - 1515191917) * 1000)
+        timestamp = int((time.time() - 1515191917) * 1000)
         with patch('statsd.StatsClient.timing') as mock_timing:
-            client.timing('test.counter', ts)
-            mock_timing.assert_called_once_with('test.counter', ts)
+            client.timing('test.counter', timestamp)
+            mock_timing.assert_called_once_with('test.counter', timestamp)
