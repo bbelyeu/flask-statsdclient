@@ -6,6 +6,7 @@ setup(
     name='Flask-StatsDClient',
     version='1.0',
     url='https://github.com/youversion/flask-statsdclient',
+    download_url='https://github.com/youversion/flask-statsdclient/archive/1.0.0.zip',
     license='MIT',
     author='Brad Belyeu',
     author_email='developers@youversion.com',
