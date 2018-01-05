@@ -3,13 +3,13 @@ Flask-StatsClient
 
 # Installation
 
-To install it, simply: ::
+To install it, simply run
 
     pip install flask-statsdclient
 
 # Usage
 
-Import it and wrap app ::
+Import it and wrap app
 
     from flask import Flask
     from flask_statsdclient import StatsDClient
@@ -63,7 +63,7 @@ python setup.py test
 ## Before committing any code
 
 We have a pre-commit hook each dev needs to setup.
-You can symlink it to run before each commit by changing directory to the repo and running:
+You can symlink it to run before each commit by changing directory to the repo and running
 
 ``` bash
 cd .git/hooks
