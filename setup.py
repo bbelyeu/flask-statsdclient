@@ -1,14 +1,14 @@
-"""A simple, configurable statsd client for Flask apps.  """
+"""A simple, configurable statsd client for Flask apps."""
 from setuptools import setup
 
 setup(
     name='Flask-StatsDClient',
-    version='1.0',
-    url='https://github.com/youversion/flask-statsdclient',
-    download_url='https://github.com/youversion/flask-statsdclient/archive/1.0.0.zip',
+    version='1.0.1',
+    url='https://github.com/bbelyeu/flask-statsdclient',
+    download_url='https://github.com/bbelyeu/flask-statsdclient/archive/1.0.1.zip',
     license='MIT',
     author='Brad Belyeu',
-    author_email='developers@youversion.com',
+    author_email='bradleylamar@gmail.com',
     description='A simple statsd client extension for Flask apps',
     long_description=__doc__,
     packages=['flask_statsdclient'],
