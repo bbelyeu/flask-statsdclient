@@ -1,13 +1,12 @@
-Flask-StatsClient
-=================
+# Flask-StatsClient
 
-# Installation
+## Installation
 
 To install it, simply run
 
     pip install flask-statsdclient
 
-# Usage
+## Usage
 
 Import it and wrap app
 
@@ -20,7 +19,7 @@ Import it and wrap app
 You may modify the host, port and prefix with ``STATSD_HOST``, ``STATSD_PORT`` and
 ``STATSD_PREFIX`` options respectively in your Flask app config.
 
-# Development
+## Development
 
 This project was written and tested with Python 3.6.
 
@@ -54,13 +53,13 @@ now load virtualenv and any .env file
 pipenv shell
 ```
 
-## Running tests
+### Running tests
 
 ``` bash
 python setup.py test
 ```
 
-## Before committing any code
+### Before committing any code
 
 We have a pre-commit hook each dev needs to setup.
 You can symlink it to run before each commit by changing directory to the repo and running

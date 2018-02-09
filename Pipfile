@@ -13,13 +13,10 @@ statsd = "*"
 
 [dev-packages]
 
-pycodestyle = "*"
+coverage = "*"
 "flake8" = "*"
 isort = "*"
+pycodestyle = "*"
 pylint = "*"
+python-coveralls = "*"
 wheel = "*"
-
-
-[requires]
-
-python_version = "3.6"
