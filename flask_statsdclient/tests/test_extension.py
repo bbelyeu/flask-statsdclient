@@ -5,7 +5,7 @@ from unittest.mock import patch
 
 from flask import Flask
 
-from flask_statsdclient import StatsDClient
+from flask_statsdclient import StatsDClient  # isort:skip
 
 
 def create_app():
