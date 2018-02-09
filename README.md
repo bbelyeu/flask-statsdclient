@@ -1,5 +1,8 @@
 # Flask-StatsClient
 
+[![Build Status](https://travis-ci.org/bbelyeu/flask-statsdclient.svg?branch=master)](https://travis-ci.org/bbelyeu/flask-statsdclient)
+[![Coverage Status](https://coveralls.io/repos/github/bbelyeu/flask-statsdclient/badge.svg?branch=master)](https://coveralls.io/github/bbelyeu/flask-statsdclient?branch=master)
+
 ## Installation
 
 To install it, simply run
@@ -56,7 +59,7 @@ pipenv shell
 ### Running tests
 
 ``` bash
-python setup.py test
+./linters.sh && coverage run --source=flask_statsdclient/ setup.py test
 ```
 
 ### Before committing any code
