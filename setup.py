@@ -1,15 +1,18 @@
-"""A simple, configurable statsd client for Flask apps."""
+"""A simple, configurable statsd client for Flask apps with optional Datadog support.
+
+It also provides optional support for Dogstatsd with the [Datadog] optional install.
+"""
 from setuptools import setup
 
 setup(
     name='Flask-StatsDClient',
-    version='1.0.1',
+    version='1.1.0',
     url='https://github.com/bbelyeu/flask-statsdclient',
-    download_url='https://github.com/bbelyeu/flask-statsdclient/archive/1.0.1.zip',
+    download_url='https://github.com/bbelyeu/flask-statsdclient/archive/1.1.0.zip',
     license='MIT',
     author='Brad Belyeu',
     author_email='bradleylamar@gmail.com',
-    description='A simple statsd client extension for Flask apps',
+    description='A simple statsd client extension for Flask apps with optional Datadog support',
     long_description=__doc__,
     packages=['flask_statsdclient'],
     zip_safe=False,
@@ -19,6 +22,9 @@ setup(
         'Flask',
         'statsd>=3.2.2'
     ],
+    extras_require={
+        'Datadog': ['datadog']
+    },
     classifiers=[
         'Environment :: Web Environment',
         'Intended Audience :: Developers',

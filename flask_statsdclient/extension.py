@@ -1,5 +1,10 @@
 """Flask StatsDClient Extension module."""
-from statsd import StatsClient
+try:
+    from datadog import initialize, statsd
+    DATADOG_IMPORTED = True
+except ImportError:
+    DATADOG_IMPORTED = False
+    from statsd import StatsClient
 
 
 class StatsDClient(object):
@@ -25,18 +30,27 @@ class StatsDClient(object):
         self.config.setdefault('STATSD_PORT', 8125)
         self.config.setdefault('STATSD_PREFIX', None)
 
-        self.statsd = StatsClient(
-            host=self.config['STATSD_HOST'],
-            port=self.config['STATSD_PORT'],
-            prefix=self.config['STATSD_PREFIX']
-        )
+        if DATADOG_IMPORTED:
+            self.statsd = statsd
+            initialize(statsd_host=self.config['STATSD_HOST'],
+                       statsd_port=self.config['STATSD_PORT'])
+        else:
+            self.statsd = StatsClient(
+                host=self.config['STATSD_HOST'],
+                port=self.config['STATSD_PORT'],
+                prefix=self.config['STATSD_PREFIX']
+            )
 
     def decr(self, *args, **kwargs):
         """Wrap statsd decr.
 
         https://statsd.readthedocs.io/en/latest/types.html#counters
+        If using datadog also transform to the necessary method.
         """
-        return self.statsd.decr(*args, **kwargs)
+        if DATADOG_IMPORTED:
+            return self.statsd.decrement(*args, **kwargs)
+        else:
+            return self.statsd.decr(*args, **kwargs)
 
     def gauge(self, *args, **kwargs):
         """Wrap statsd gauge.
@@ -49,8 +63,12 @@ class StatsDClient(object):
         """Wrap statsd incr.
 
         https://statsd.readthedocs.io/en/latest/types.html#counters
+        If using datadog also transform to the necessary method.
         """
-        return self.statsd.incr(*args, **kwargs)
+        if DATADOG_IMPORTED:
+            return self.statsd.increment(*args, **kwargs)
+        else:
+            return self.statsd.incr(*args, **kwargs)
 
     def set(self, *args, **kwargs):
         """Wrap statsd set.
