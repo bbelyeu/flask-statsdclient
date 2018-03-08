@@ -48,16 +48,16 @@ class StatsDClient(object):
         If using datadog also transform to the necessary method.
         """
         if DATADOG_IMPORTED:
-            return self.statsd.decrement(*args, **kwargs)
+            self.statsd.decrement(*args, **kwargs)
         else:
-            return self.statsd.decr(*args, **kwargs)
+            self.statsd.decr(*args, **kwargs)
 
     def gauge(self, *args, **kwargs):
         """Wrap statsd gauge.
 
         https://statsd.readthedocs.io/en/latest/types.html#gauges
         """
-        return self.statsd.gauge(*args, **kwargs)
+        self.statsd.gauge(*args, **kwargs)
 
     def incr(self, *args, **kwargs):
         """Wrap statsd incr.
@@ -66,27 +66,27 @@ class StatsDClient(object):
         If using datadog also transform to the necessary method.
         """
         if DATADOG_IMPORTED:
-            return self.statsd.increment(*args, **kwargs)
+            self.statsd.increment(*args, **kwargs)
         else:
-            return self.statsd.incr(*args, **kwargs)
+            self.statsd.incr(*args, **kwargs)
 
     def set(self, *args, **kwargs):
         """Wrap statsd set.
 
         https://statsd.readthedocs.io/en/latest/types.html#sets
         """
-        return self.statsd.set(*args, **kwargs)
+        self.statsd.set(*args, **kwargs)
 
     def timer(self, *args, **kwargs):
         """Wrap statsd timer.
 
         https://statsd.readthedocs.io/en/latest/timing.html#timing-chapter
         """
-        return self.statsd.timer(*args, **kwargs)
+        self.statsd.timer(*args, **kwargs)
 
     def timing(self, *args, **kwargs):
         """Wrap statsd timing.
 
         https://statsd.readthedocs.io/en/latest/timing.html#timing-chapter
         """
-        return self.statsd.timing(*args, **kwargs)
+        self.statsd.timing(*args, **kwargs)
