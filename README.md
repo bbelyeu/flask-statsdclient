@@ -9,6 +9,13 @@ To install it, simply run
 
     pip install flask-statsdclient
 
+If you're using Datadog(https://www.datadoghq.com/) for your metric collection, you can enable
+the additional functionality of
+dogstatsd(http://datadogpy.readthedocs.io/en/latest/#datadog-dogstatsd-module)
+by installing it via
+
+    pip install flask-statsdclient[Datadog]
+
 ## Usage
 
 Import it and wrap app
