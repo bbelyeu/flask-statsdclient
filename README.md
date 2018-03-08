@@ -3,6 +3,10 @@
 [![Build Status](https://travis-ci.org/bbelyeu/flask-statsdclient.svg?branch=master)](https://travis-ci.org/bbelyeu/flask-statsdclient)
 [![Coverage Status](https://coveralls.io/repos/github/bbelyeu/flask-statsdclient/badge.svg?branch=master)](https://coveralls.io/github/bbelyeu/flask-statsdclient?branch=master)
 
+## Requirements
+
+This project requires Python 3.5+ and Flask 0.12. Test builds in Travis CI test 3.5 & 3.6.
+
 ## Installation
 
 To install it, simply run
@@ -30,8 +34,6 @@ You may modify the host, port and prefix with ``STATSD_HOST``, ``STATSD_PORT`` a
 ``STATSD_PREFIX`` options respectively in your Flask app config.
 
 ## Development
-
-This project was written and tested with Python 3.6.
 
 On a mac you can use the following commands to get up and running.
 ``` bash
