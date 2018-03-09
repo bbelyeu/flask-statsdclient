@@ -1,10 +1,30 @@
 """Flask StatsDClient Extension module."""
+from functools import wraps
+
 try:
     from datadog import initialize, statsd
     DATADOG_IMPORTED = True
 except ImportError:
     DATADOG_IMPORTED = False
     from statsd import StatsClient
+
+
+def datadog_prefix(method):
+    """Add prefix if using Datadog.
+
+    http://datadogpy.readthedocs.io/en/latest/#datadog-dogstatsd-module
+    """
+
+    @wraps(method)
+    def wrapper(self, *args, **kwargs):
+        """Inner decorator wrapper."""
+        if DATADOG_IMPORTED and self.config['STATSD_PREFIX']:
+            # Datadog statsd doesn't handle prefix
+            args_0 = '.'.join([self.config['STATSD_PREFIX'], args[0]])
+            args = (args_0,) + args[1:]
+        return method(self, *args, **kwargs)
+
+    return wrapper
 
 
 class StatsDClient(object):
@@ -41,17 +61,20 @@ class StatsDClient(object):
                 prefix=self.config['STATSD_PREFIX']
             )
 
+    @datadog_prefix
     def decr(self, *args, **kwargs):
         """Wrap statsd decr.
 
         https://statsd.readthedocs.io/en/latest/types.html#counters
-        If using datadog also transform to the necessary method.
+        If using datadog, transform method name.
+        http://datadogpy.readthedocs.io/en/latest/#datadog-dogstatsd-module
         """
         if DATADOG_IMPORTED:
             self.statsd.decrement(*args, **kwargs)
         else:
             self.statsd.decr(*args, **kwargs)
 
+    @datadog_prefix
     def gauge(self, *args, **kwargs):
         """Wrap statsd gauge.
 
@@ -59,17 +82,20 @@ class StatsDClient(object):
         """
         self.statsd.gauge(*args, **kwargs)
 
+    @datadog_prefix
     def incr(self, *args, **kwargs):
         """Wrap statsd incr.
 
         https://statsd.readthedocs.io/en/latest/types.html#counters
-        If using datadog also transform to the necessary method.
+        If using datadog, transform method name.
+        http://datadogpy.readthedocs.io/en/latest/#datadog-dogstatsd-module
         """
         if DATADOG_IMPORTED:
             self.statsd.increment(*args, **kwargs)
         else:
             self.statsd.incr(*args, **kwargs)
 
+    @datadog_prefix
     def set(self, *args, **kwargs):
         """Wrap statsd set.
 
@@ -77,6 +103,7 @@ class StatsDClient(object):
         """
         self.statsd.set(*args, **kwargs)
 
+    @datadog_prefix
     def timer(self, *args, **kwargs):
         """Wrap statsd timer.
 
@@ -84,6 +111,7 @@ class StatsDClient(object):
         """
         self.statsd.timer(*args, **kwargs)
 
+    @datadog_prefix
     def timing(self, *args, **kwargs):
         """Wrap statsd timing.
 
