@@ -36,6 +36,15 @@ class TestStatsD(unittest.TestCase):
             client.decr('test.counter')
             mock_decr.assert_called_once_with('test.counter')
 
+    def test_decr_with_prefix(self):
+        """Test decr wrapper with a prefix."""
+        self.app.config['STATSD_PREFIX'] = 'foo'
+        client = flask_statsdclient.StatsDClient(self.app)
+
+        with patch('datadog.statsd.decrement') as mock_decr:
+            client.decr('test.counter')
+            mock_decr.assert_called_once_with('foo.test.counter')
+
     def test_gauge(self):
         """Test gauge wrapper."""
         client = flask_statsdclient.StatsDClient(self.app)
@@ -55,6 +64,15 @@ class TestStatsD(unittest.TestCase):
             mock_incr.assert_called_with('test.counter', 10)
             client.incr('test.counter', rate=0.1)
             mock_incr.assert_called_with('test.counter', rate=0.1)
+
+    def test_incr_with_prefix(self):
+        """Test incr wrapper with prefix."""
+        self.app.config['STATSD_PREFIX'] = 'foo'
+        client = flask_statsdclient.StatsDClient(self.app)
+
+        with patch('datadog.statsd.increment') as mock_incr:
+            client.incr('test.counter')
+            mock_incr.assert_called_once_with('foo.test.counter')
 
     def test_set(self):
         """Test set wrapper."""
