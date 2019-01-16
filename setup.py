@@ -6,9 +6,9 @@ from setuptools import setup
 
 setup(
     name='Flask-StatsDClient',
-    version='2.0.1',
+    version='2.0.2',
     url='https://github.com/bbelyeu/flask-statsdclient',
-    download_url='https://github.com/bbelyeu/flask-statsdclient/archive/2.0.1.zip',
+    download_url='https://github.com/bbelyeu/flask-statsdclient/archive/2.0.2.zip',
     license='MIT',
     author='Brad Belyeu',
     author_email='bradleylamar@gmail.com',

@@ -3,7 +3,7 @@ python:
   - "3.5"
   - "3.6"
 install:
-  - pip install -r test_requirements.txt
+  - pip install -r requirements.txt && pip install -r requirements-dev.txt
 script:
   - ./linters.sh && coverage run --source=flask_statsdclient/ setup.py test
 after_success:

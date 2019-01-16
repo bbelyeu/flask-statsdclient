@@ -27,7 +27,7 @@ def datadog_prefix(method):
     return wrapper
 
 
-class StatsDClient(object):
+class StatsDClient():
     """Class to wrap Flask app and provide access to statsd."""
 
     def __init__(self, app=None, config=None):
