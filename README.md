@@ -33,6 +33,9 @@ Import it and wrap app
 You may modify the host, port and prefix with ``STATSD_HOST``, ``STATSD_PORT`` and
 ``STATSD_PREFIX`` options respectively in your Flask app config.
 
+If you are using Datadog with a Unix socket, instead of specifying the host & port in config,
+add ``DD_SOCKET`` which is a fully qualified Unix path to the socket.
+
 ## Development
 
 On a mac you can use the following commands to get up and running.
