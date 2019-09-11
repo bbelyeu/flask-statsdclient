@@ -51,9 +51,12 @@ class StatsDClient():
         self.config.setdefault('STATSD_PREFIX', None)
 
         if DATADOG_IMPORTED:
-            self.statsd = statsd
-            initialize(statsd_host=self.config['STATSD_HOST'],
-                       statsd_port=self.config['STATSD_PORT'])
+            self.statsd = statsd  # Imported for DD
+            if self.config.get('DD_SOCKET'):  # If socket path is defined
+                initialize(statsd_socket_path=self.config['DD_SOCKET'])
+            else:
+                initialize(statsd_host=self.config['STATSD_HOST'],
+                           statsd_port=self.config['STATSD_PORT'])
         else:
             self.statsd = StatsClient(
                 host=self.config['STATSD_HOST'],
