@@ -4,9 +4,8 @@
 #
 #    pip-compile requirements-dev.in
 #
-
 astroid==2.2.5            # via pylint
-bleach==3.1.0             # via readme-renderer
+bleach==3.1.1             # via readme-renderer
 certifi==2019.6.16        # via requests
 chardet==3.0.4            # via requests
 coverage==4.5.4
@@ -38,4 +37,4 @@ wheel==0.33.6
 wrapt==1.11.2             # via astroid
 
 # The following packages are considered to be unsafe in a requirements file:
-# setuptools==41.2.0        # via twine
+# setuptools
