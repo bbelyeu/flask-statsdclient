@@ -5,35 +5,35 @@
 #    pip-compile requirements-dev.in
 #
 astroid==2.2.5            # via pylint
-bleach==3.1.1             # via readme-renderer
+bleach==3.1.2             # via readme-renderer
 certifi==2019.6.16        # via requests
 chardet==3.0.4            # via requests
-coverage==4.5.4
-detect-secrets==0.12.5
+coverage==4.5.4           # via -r requirements-dev.in, python-coveralls
+detect-secrets==0.12.5    # via -r requirements-dev.in
 docutils==0.15.2          # via readme-renderer
 entrypoints==0.3          # via flake8
-flake8==3.7.8
+flake8==3.7.8             # via -r requirements-dev.in
 idna==2.8                 # via requests
-isort==4.3.21
+isort==4.3.21             # via -r requirements-dev.in, pylint
 lazy-object-proxy==1.4.2  # via astroid
 mccabe==0.6.1             # via flake8, pylint
 pkginfo==1.5.0.1          # via twine
-pycodestyle==2.5.0
+pycodestyle==2.5.0        # via -r requirements-dev.in, flake8
 pyflakes==2.1.1           # via flake8
 pygments==2.4.2           # via readme-renderer
-pylint==2.3.1
-python-coveralls==2.9.3
-pyyaml==5.1.2
+pylint==2.3.1             # via -r requirements-dev.in
+python-coveralls==2.9.3   # via -r requirements-dev.in
+pyyaml==5.1.2             # via -r requirements-dev.in, detect-secrets, python-coveralls
 readme-renderer==24.0     # via twine
 requests-toolbelt==0.9.1  # via twine
 requests==2.22.0          # via detect-secrets, python-coveralls, requests-toolbelt, twine
 six==1.12.0               # via astroid, bleach, python-coveralls, readme-renderer
 tqdm==4.35.0              # via twine
-twine==1.14.0
+twine==1.14.0             # via -r requirements-dev.in
 typed-ast==1.4.0          # via astroid
 urllib3==1.25.3           # via requests
 webencodings==0.5.1       # via bleach
-wheel==0.33.6
+wheel==0.33.6             # via -r requirements-dev.in
 wrapt==1.11.2             # via astroid
 
 # The following packages are considered to be unsafe in a requirements file:
