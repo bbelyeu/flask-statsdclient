@@ -5,7 +5,7 @@
 #    pip-compile requirements-dev.in
 #
 astroid==2.2.5            # via pylint
-bleach==3.1.2             # via readme-renderer
+bleach==3.1.4             # via readme-renderer
 certifi==2019.6.16        # via requests
 chardet==3.0.4            # via requests
 coverage==4.5.4           # via -r requirements-dev.in, python-coveralls
