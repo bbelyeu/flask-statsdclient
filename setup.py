@@ -2,6 +2,7 @@
 
 It also provides optional support for Dogstatsd with the [Datadog] optional install.
 """
+import re
 import sys
 
 from setuptools import setup
@@ -9,7 +10,7 @@ from setuptools import setup
 if sys.version_info < (3, 5):
     sys.exit('Sorry, Python < 3.5 is not supported')
 
-__version__ = '2.1.0'
+__version__ = '2.1.1'
 
 setup(
     name='Flask-StatsDClient',
@@ -20,7 +21,7 @@ setup(
     license='MIT',
     author='Brad Belyeu',
     author_email='bradleylamar@gmail.com',
-    description=__doc__,
+    description=re.sub(r"\s+", " ", __doc__),
     long_description=open("README.md", "r").read(),
     packages=['flask_statsdclient'],
     zip_safe=False,
