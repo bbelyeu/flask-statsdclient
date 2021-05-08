@@ -54,7 +54,7 @@ pyparsing==2.4.7
     # via packaging
 python-coveralls==2.9.3
     # via -r requirements-dev.in
-pyyaml==5.1.2
+pyyaml==5.4
     # via
     #   -r requirements-dev.in
     #   detect-secrets
